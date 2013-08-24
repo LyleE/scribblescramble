@@ -1,0 +1,17 @@
+div#content {
+	position: absolute;
+	width: 500px;
+	margin-left:50%;
+	display: block;
+}
+
+div#scribble {
+	margin-top: 50px;
+	margin-left: -250px;
+}
+
+#scribble canvas {
+	border: 1px solid black;
+	height: 300px;
+	width: 500px;
+}
