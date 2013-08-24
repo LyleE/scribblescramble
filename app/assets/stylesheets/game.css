@@ -15,3 +15,7 @@ div#scribble {
 	height: 300px;
 	width: 500px;
 }
+
+#target {
+	color: red;
+}

@@ -42,6 +42,15 @@ function mouseUpHandler(evt) {
 	ctx.closePath();
 }
 
+function save() {
+	var data=canvas.toDataURL("image/png");
+	data = data.replace(/^data:image\/png;base64,/, "");   
 
+	$('input#data').val(data)
+
+	console.log($('input#data'))	
+
+	return true;
+}
 
 
