@@ -8,6 +8,7 @@
 
 		<form id="submit" method="post" action="save" onsubmit="return save()" >
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input name="target" value="<%= @target %>" type="hidden">
 			<input id="data" name="data" value="" type="hidden" />
 			<input type="Submit" /> 
 		</form>
