@@ -1,17 +1,23 @@
 class DrawController < ApplicationController
 
 	def index
-		@target = "a duck"
+		# Get a random scribble type!
+		@type = ScribbleType.first(:offset => rand(ScribbleType.count))
 	end
 
 	def save
 		image = Base64.decode64(params[:data]);
+		type = ScribbleType.find(params[:type_id])
 
-		#File.open("testing.png","wb") do |f|
-		#	f.write(image);
-		#end
+		if(!type)
+			render status: 400, text: "uh oh"
+		end
 
-		bucket.objects[getKey params[:target]].write(image)
+		key = getKey type
+
+		bucket.objects[ key ].write(image)
+
+		Scribble.create(s3_key: key, scribble_type_id: type.id)
 
 		redirect_to :root
 	end
@@ -23,8 +29,8 @@ class DrawController < ApplicationController
 		s3.buckets['scribblescramble']
 	end
 
-	def getKey target
-		target.tr(' ','_')+"_"+(1000.0*Time.now.to_f).to_i.to_s+".png"
+	def getKey type
+		type.name.tr(' ','_')+"_"+(1000.0*Time.now.to_f).to_i.to_s+".png"
 	end
 
 end
