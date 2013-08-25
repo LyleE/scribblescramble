@@ -57,11 +57,11 @@ function mouseEnterHandler(evt) {
 
 function clickedStartHandler() {
 	$cover.unbind('click');
+	hideNotifications();
 	countDownTo(startArt)
 }
 
 function startArt() {
-	console.log("ART STARTED")
 
 	endOfArtTime = (new Date).getTime() + 10000
 	isArtTime = true
@@ -101,6 +101,7 @@ function save() {
 	$('#submit').submit();
 }
 
+//Called just before the form gets submitted
 function setImageData() {
 	var data=canvas.toDataURL("image/png");
 	data = data.replace(/^data:image\/png;base64,/, "");   
@@ -133,4 +134,10 @@ function queueMsg(msg, time) {
 		$cover.html(msg);
 		next();
 	}).delay(time);
+}
+
+function hideNotifications() {
+	$('#messages').
+		clearQueue().
+		css('height','0');
 }
