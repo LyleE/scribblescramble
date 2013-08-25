@@ -15,13 +15,27 @@ class User < ActiveRecord::Base
 		update_rating 0.0, other
 	end
 
+	def happy_note message
+		new_line = happy_notifications.empty?? "" : "\n";
+		update(happy_notifications: happy_notifications + new_line + message)
+	end
+
+	def sad_note message
+		new_line = sad_notifications.empty?? "" : "\n";
+		update(sad_notifications: sad_notifications + new_line + message)
+	end
+
 	private
 
 	# http://en.wikipedia.org/wiki/Elo_rating_system#Mathematical_details
 	def update_rating actualResult, otherRating
 		expectedResult = (Q rating) / ( (Q rating) + (Q otherRating) )
-		newRating = ( rating + 32.0*(actualResult - expectedResult) ).round
+		delta = (32.0*(actualResult - expectedResult)).round
+		newRating = rating + delta
+		
 		update( rating: newRating )
+		
+		delta
 	end
 
 	def Q rating

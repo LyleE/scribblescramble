@@ -19,22 +19,29 @@
         <%= AutoRefresh.channel('com.1y1e.scribblescramble').html_safe %>
     </head>
     <body>
-        <div id="nav">
-            <% if current_user %>
-                <%= link_to "Play!", :play %> |
-                <%= link_to "Rate!", :rate %> ||
-                <%= link_to "#{current_user.username}'s Profile (#{current_user.rating})", user_path(current_user.id) %> |
-                <%= link_to "Logout", :logout %>
-            <% else %>
-                <%= link_to "Register", :register %> |
-            
-                <%= link_to "Login", :login %>
-            <% end %>
-        </div>
-        <div>
-            <p id="notice"><%= notice %></p>
-            <p id="alert"><%= alert %></p>
-        </div>
+        <div id="content-wrapper">
+            <div id="content">
+                <div id="nav">
+                    <% if current_user %>
+                        <div class="left">
+                            <%= link_to "Play!", :play %> |
+                            <%= link_to "Rate!", :rate %>
+                        </div><div class="right">
+                            <%= link_to "#{current_user.username}'s Profile (#{current_user.rating})", user_path(current_user.id) %> |
+                            <%= link_to "Logout", :logout %>
+                        </div>
+                    <% else %>
+                        <div class="right">
+                            <%= link_to "Register", :register %> |
+                            <%= link_to "Login", :login %>
+                        </div>
+                    <% end %>
+                    <div class='clear'></div>
+                </div>
+                <div id="messages">
+                    <div id="notice"><%= notice %></div>
+                    <div id="alert"><%= alert %></div>
+                </div>
 
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>

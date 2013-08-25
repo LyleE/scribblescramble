@@ -19,7 +19,8 @@ class RateController < ApplicationController
 			end
 		end
 		
-		redirect_to :play, :notice => 'No ratings available'
+
+		redirect_to :play, :alert => "No ratings available"
 	end
 
 	def save
@@ -32,8 +33,11 @@ class RateController < ApplicationController
 			winnerOldRating = winner.rating
 			loserOldRating = loser.rating
 
-			winner.won_vs(loserOldRating)
-			loser.lost_vs(winnerOldRating)
+			pointsWon = winner.won_vs(loserOldRating)
+			winner.happy_note "Your scribble of #{winningScribble.scribble_type.full_name} earned you #{pointsWon} points :)"
+
+			pointsLost = loser.lost_vs(winnerOldRating)
+			loser.sad_note "Your scribble of #{losingScribble.scribble_type.full_name} lost you #{-pointsLost} points :("
 
 			winningScribble.destroy
 			losingScribble.destroy

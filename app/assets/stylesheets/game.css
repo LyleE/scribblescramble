@@ -7,19 +7,17 @@
 }
 
 
-div#content {
-	position: absolute;
-	width: 500px;
-	margin-left:50%;
+div#content-wrapper {
 	display: block;
+	margin: 0 auto;
+	width: 500px;
 }
 
-div#scribble {
-	margin-top: 50px;
-	margin-left: -250px;
+div#content {
+	width: 500px;
 }
 
-#scribble canvas {
+canvas {
 	border: 1px solid black;
 	height: 300px;
 	width: 500px;
@@ -27,6 +25,26 @@ div#scribble {
 
 #target {
 	color: red;
+}
+
+#alert {
+	color: red;
+}
+
+#notice {
+	color: green;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
 }
 
 /*

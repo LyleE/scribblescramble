@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(version: 20130824210515) do
   add_index "scribbles", ["scribble_type_id"], name: "type_index"
 
   create_table "users", force: true do |t|
-    t.string   "username",                        null: false
+    t.string   "username",                           null: false
+    t.string   "happy_notifications", default: ""
+    t.string   "sad_notifications",   default: ""
     t.string   "crypted_password"
     t.string   "salt"
-    t.integer  "rating",           default: 1600
+    t.integer  "rating",              default: 1600
     t.datetime "created_at"
     t.datetime "updated_at"
   end
