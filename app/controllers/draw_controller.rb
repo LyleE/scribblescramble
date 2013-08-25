@@ -14,7 +14,11 @@ class DrawController < ApplicationController
 		s = Scribble.new(s3_key: key, scribble_type_id: type.id, user_id: current_user.id)
 		s.saveImage image
 
-		redirect_to :play
+		if rand(3) == 0
+			redirect_to :rate, :flash => { draw_redirect: true }
+		else
+			redirect_to :play
+		end
 	end
 
 	private

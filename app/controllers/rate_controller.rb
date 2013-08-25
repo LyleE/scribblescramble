@@ -19,7 +19,11 @@ class RateController < ApplicationController
 			end
 		end
 
-		redirect_to :play, :alert => "No more ratings for now. Come back later!"
+		if flash[:draw_redirect]
+			redirect_to :play
+		else
+			redirect_to :play, :alert => "No more ratings for now. Come back later!"
+		end
 	end
 
 	def save
@@ -42,7 +46,7 @@ class RateController < ApplicationController
 			losingScribble.destroy
 		end
 
-		redirect_to :rate, notice: "Thanks! Want to rate another?"
+		redirect_to :rate, :flash => { draw_redirect: true, notice: "Thanks! Want to rate another?" }
 	end
 
 end
