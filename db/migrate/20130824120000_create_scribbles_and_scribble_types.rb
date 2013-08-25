@@ -8,7 +8,6 @@ class CreateScribblesAndScribbleTypes < ActiveRecord::Migration
     create_table :scribbles do |t|
       t.string		:s3_key
       t.references 	:scribble_type
-      t.boolean 	:rated, default: false
     end
   end
 end

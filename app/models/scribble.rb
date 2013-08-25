@@ -16,6 +16,7 @@ class Scribble < ActiveRecord::Base
 	private
     def delete_from_s3
       s3_object.delete
+      scribble_type.decrement!(:count)
     end
 
     def s3_object

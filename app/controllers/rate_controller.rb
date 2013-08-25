@@ -4,9 +4,14 @@ class RateController < ApplicationController
 		@type = ScribbleType.random_rateable
 		if(@type)
 			now = Time.now.to_i
-			@scribbles = Scribble.where(scribble_type_id: @type.id).where("last_rated < ?", now - 60).limit(2)
+			@scribbles = Scribble.
+				#where("last_rated < ?", now - 60).
+				where(scribble_type_id: @type.id).
+				group(:user_id).
+				where.not(user_id: current_user.id).
+				limit(2)
 
-			if(@scribbles.count == 2)
+			if(@scribbles.length == 2)
 				@scribbles.each do |s|
 					s.update(last_rated: now)
 				end
@@ -33,6 +38,8 @@ class RateController < ApplicationController
 			winningScribble.destroy
 			losingScribble.destroy
 		end
+
+		redirect_to :rate
 	end
 
 end

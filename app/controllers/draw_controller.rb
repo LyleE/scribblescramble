@@ -15,7 +15,7 @@ class DrawController < ApplicationController
 
 		key = getKey type
 
-		s = Scribble.new(s3_key: key, scribble_type_id: type.id)
+		s = Scribble.new(s3_key: key, scribble_type_id: type.id, user_id: current_user.id)
 		s.saveImage image
 
 		redirect_to :root

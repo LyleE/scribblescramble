@@ -22,8 +22,8 @@
         <div id="nav">
             <% if current_user %>
                 <%= link_to "Play!", :play %> |
-                <%= link_to "Rate!", :rate %> |
-                <%= link_to "Profile", user_path(current_user.id) %> |
+                <%= link_to "Rate!", :rate %> ||
+                <%= link_to "Your Profile (#{current_user.rating})", user_path(current_user.id) %> |
                 <%= link_to "Logout", :logout %>
             <% else %>
                 <%= link_to "Register", :register %> |

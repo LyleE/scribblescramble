@@ -26,6 +26,7 @@ Vagrant::Application.routes.draw do
   post 'save' => 'draw#save'
   
   get 'rate' => 'rate#index', as: :rate
+  post 'rate' => 'rate#save'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

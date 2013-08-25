@@ -8,19 +8,20 @@ class User < ActiveRecord::Base
 	validates_confirmation_of :password, :message => "doesn't match", :if => :password
 
 	def won_vs other
-		update_rating 1.0 other
+		update_rating 1.0, other
 	end
 
-	def lost_vs otherRating
-		update_rating 0.0 other
+	def lost_vs other
+		update_rating 0.0, other
 	end
 
 	private
 
 	# http://en.wikipedia.org/wiki/Elo_rating_system#Mathematical_details
-	def update_rating actualResult otherRating
-		expectedResult = Q(rating) / ( Q(rating) + Q(otherRating) )
-		update(rating: rating + 32(actualResult - expectedResult))
+	def update_rating actualResult, otherRating
+		expectedResult = (Q rating) / ( (Q rating) + (Q otherRating) )
+		newRating = ( rating + 32.0*(actualResult - expectedResult) ).round
+		update( rating: newRating )
 	end
 
 	def Q rating

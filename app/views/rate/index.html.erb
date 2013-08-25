@@ -1,4 +1,18 @@
 <h2>Which the best <%= @type.name %>?</h2>
-<% @scribbles.each do |s| %>
-	<%= image_tag s.url %>
-<% end %>
+
+<form id="submit" method="post" visibility="hidden">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input id="winner" name="winner" value="" type="hidden" />
+	<input id="loser"  name="loser"  value="" type="hidden" />
+</form>
+
+<a class="scribble scribble0" href='#' onClick="submit('<%= @scribbles[0].s3_key %>','<%= @scribbles[1].s3_key %>')">
+	<%= image_tag @scribbles[0].url %>
+</a>
+
+<a class="scribble scribble1" href='#' onClick="submit('<%= @scribbles[1].s3_key %>','<%= @scribbles[0].s3_key %>')">
+	<%= image_tag @scribbles[1].url %>
+</a>
+
+
+<%= javascript_include_tag 'rate' %>  
