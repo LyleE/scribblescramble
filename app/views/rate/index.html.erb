@@ -1,0 +1,4 @@
+<h2>Which the best <%= @type.name %>?</h2>
+<% @scribbles.each do |s| %>
+	<%= image_tag s.url %>
+<% end %>

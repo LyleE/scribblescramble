@@ -1,11 +1,31 @@
 Vagrant::Application.routes.draw do
+  root :to => 'draw#index'
+  
+  #resources :user_sessions
+  post 'user_sessions/new' => 'user_sessions#create', as: :user_sessions
+
+  #resources :users
+  get 'users/:id' => 'users#show', as: :user
+  delete 'users/:id' => 'users#destroy'
+  get 'users/:id/edit' => 'users#edit', as: :edit_user
+  post 'users/:id/edit' => 'users#update'
+  
+  get 'login' => 'user_sessions#new', as: :login
+  get 'logout' => 'user_sessions#destroy', as: :logout
+
+  get 'register' => "users#new", as: :register
+  post 'register' => "users#create"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'draw#index'
+  #root 'draw#index'
 
+  get 'play' => 'draw#index', as: :play
   post 'save' => 'draw#save'
+  
+  get 'rate' => 'rate#index', as: :rate
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

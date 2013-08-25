@@ -19,6 +19,23 @@
         <%= AutoRefresh.channel('com.1y1e.scribblescramble').html_safe %>
     </head>
     <body>
+        <div id="nav">
+            <% if current_user %>
+                <%= link_to "Play!", :play %> |
+                <%= link_to "Rate!", :rate %> |
+                <%= link_to "Profile", user_path(current_user.id) %> |
+                <%= link_to "Logout", :logout %>
+            <% else %>
+                <%= link_to "Register", :register %> |
+            
+                <%= link_to "Login", :login %>
+            <% end %>
+        </div>
+        <div>
+            <p id="notice"><%= notice %></p>
+            <p id="alert"><%= alert %></p>
+        </div>
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->

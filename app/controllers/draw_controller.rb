@@ -2,7 +2,7 @@ class DrawController < ApplicationController
 
 	def index
 		# Get a random scribble type!
-		@type = ScribbleType.first(:offset => rand(ScribbleType.count))
+		@type = ScribbleType.random
 	end
 
 	def save
@@ -15,19 +15,13 @@ class DrawController < ApplicationController
 
 		key = getKey type
 
-		bucket.objects[ key ].write(image)
-
-		Scribble.create(s3_key: key, scribble_type_id: type.id)
+		s = Scribble.new(s3_key: key, scribble_type_id: type.id)
+		s.saveImage image
 
 		redirect_to :root
 	end
 
 	private
-
-	def bucket
-		s3 = AWS::S3.new
-		s3.buckets['scribblescramble']
-	end
 
 	def getKey type
 		type.name.tr(' ','_')+"_"+(1000.0*Time.now.to_f).to_i.to_s+".png"

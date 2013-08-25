@@ -11,17 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 1377369630) do
+ActiveRecord::Schema.define(version: 20130824210515) do
 
   create_table "scribble_types", force: true do |t|
-    t.string "name"
-    t.string "full_name"
+    t.string  "name"
+    t.string  "full_name"
+    t.integer "count",     default: 0
   end
 
   create_table "scribbles", force: true do |t|
     t.string  "s3_key"
     t.integer "scribble_type_id"
     t.boolean "rated",            default: false
+    t.integer "user_id"
+    t.integer "last_rated",       default: 0
+  end
+
+  add_index "scribbles", ["scribble_type_id"], name: "type_index"
+
+  create_table "users", force: true do |t|
+    t.string   "username",                        null: false
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.integer  "rating",           default: 1600
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
