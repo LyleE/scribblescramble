@@ -5,7 +5,7 @@ class RateController < ApplicationController
 		if(@type)
 			now = Time.now.to_i
 			@scribbles = Scribble.
-				#where("last_rated < ?", now - 60).
+				where("last_rated < ?", now - 60). #delay to give people 60 seconds to rate before serving again
 				where(scribble_type_id: @type.id).
 				group(:user_id).
 				where.not(user_id: current_user.id).
@@ -18,9 +18,8 @@ class RateController < ApplicationController
 				return
 			end
 		end
-		
 
-		redirect_to :play, :alert => "No ratings available"
+		redirect_to :play, :alert => "No more ratings for now. Come back later!"
 	end
 
 	def save
@@ -43,7 +42,7 @@ class RateController < ApplicationController
 			losingScribble.destroy
 		end
 
-		redirect_to :rate
+		redirect_to :rate, notice: "Thanks! Want to rate another?"
 	end
 
 end

@@ -1,16 +1,20 @@
 
-		<h2>Your challenge: Draw <span id="target"><%= @type.full_name %></span> in 10 seconds!</h2>
+		<h2>Scribble <span id="target"><%= @type.full_name %></span> in <span id="timer">10</span> seconds!</h2>
 
-		<canvas id="canvas" width="500" height="300">
-			<p>Your browser doesn't support canvas! Sorry buddy, come back with a modern browser.</p>
-		</canvas>
+		<div id="canvas-container">
+			<canvas id="canvas" width="500" height="300">
+				<p>Your browser doesn't support canvas! Sorry buddy, come back with a modern browser.</p>
+			</canvas>
+			<span id="cover">Start</span>
+		</div>
 
-		<form id="submit" method="post" action="save" onsubmit="return save()" >
+		<form id="submit" method="post" action="save" onsubmit="return setImageData()" >
 			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 			<input name="type_id" value="<%= @type.id %>" type="hidden">
 			<input id="data" name="data" value="" type="hidden" />
 			<input type="Submit" /> 
 		</form>
 
+		<div id="flash"></div>
 
 <%= javascript_include_tag 'game' %>

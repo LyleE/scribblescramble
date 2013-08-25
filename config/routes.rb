@@ -1,5 +1,5 @@
 Vagrant::Application.routes.draw do
-  root :to => 'draw#index'
+  root :to => 'draw#index', as: :play
   
   #resources :user_sessions
   post 'user_sessions/new' => 'user_sessions#create', as: :user_sessions
@@ -22,7 +22,6 @@ Vagrant::Application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'draw#index'
 
-  get 'play' => 'draw#index', as: :play
   post 'save' => 'draw#save'
   
   get 'rate' => 'rate#index', as: :rate

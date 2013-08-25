@@ -28,7 +28,7 @@ summary {
  */
 
 audio,
-canvas,
+/*canvas, */
 video {
     display: inline-block;
     *display: inline;

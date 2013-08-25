@@ -8,9 +8,9 @@ class UserSessionsController < ApplicationController
   def create
     respond_to do |format|
       if @user = login(params[:username],params[:password])
-        format.html { redirect_back_or_to(:root, :notice => 'Login successful.') }
+        format.html { redirect_back_or_to(:play, :notice => 'Login successful.') }
       else
-        format.html { redirect_to(:login, :notice => "Login failed.") }
+        format.html { redirect_to(:login, :alert => "Login failed.") }
       end
     end
   end

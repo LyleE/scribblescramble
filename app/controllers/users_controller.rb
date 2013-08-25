@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if User.exists?(params[:id])
       @user = User.find(params[:id])
     else
-      redirect_to current_user, notice: 'Who?'
+      redirect_to current_user, alert: 'Who?'
     end
   end
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     if params[:id].to_i != current_user.id
-      redirect_to edit_user_path(current_user), notice: 'Can\'t edit other people, bro'
+      redirect_to edit_user_path(current_user), alert: 'Can\'t edit other people, bro'
     end
     @user = current_user
     @button_text = "Save"
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if params[:id].to_i != current_user.id
-      redirect_to current_user, notice: 'Can\'t edit other people, bro'
+      redirect_to current_user, alert: 'Can\'t edit other people, bro'
     end
 
     respond_to do |format|
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     if params[:id].to_i != current_user.id
-      redirect_to edit_user_path(current_user), notice: 'Can\'t delete other people bro!'
+      redirect_to edit_user_path(current_user), alert: 'Can\'t delete other people bro!'
     end
     current_user.destroy
     respond_to do |format|

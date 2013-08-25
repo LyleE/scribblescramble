@@ -1,9 +1,6 @@
-- Vastly improve drawing interface!!!
-	- Colours, (numbered)
-	- Pen size, (mouse scroll)
-- Timer on drawing
-	- "You're drawing a duck" [OK]
-	- Ready, set, "art"!
-	- Countdown timer
-	- auto submit form
-- Better feedback as to what did well!
+HIGH:
+- Drawing: Colours (numbered shortcuts)
+
+MEDIUM:
+- Drawing: Pen size, (mouse scroll?)
+- Leaderboard

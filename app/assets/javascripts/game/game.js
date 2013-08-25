@@ -1,6 +1,8 @@
-var mouseDown = false, canvas, ctx;
+var mouseDown = false, canvas, ctx, $cover, $timer, intervalID, isArtTime, endOfArtTime;
 
 $(function() {
+	$cover = $('#cover');
+	$timer = $('#timer');
 	canvas = document.getElementById('canvas');
   	if (canvas.getContext) {
 	    ctx = canvas.getContext('2d');
@@ -9,27 +11,23 @@ $(function() {
 	    $canvas.mousedown(mouseDownHandler);
 	    $canvas.mousemove(mouseMoveHandler);
 	    $canvas.mouseup(mouseUpHandler);
-	    
-	    $canvas.mouseleave(function(evt) {
-	    	mouseMoveHandler(evt);
-	    	mouseUpHandler(evt);
-	    });
-	    $canvas.mouseenter(function(evt) {
-	    	if(evt.which)
-	    		mouseDownHandler(evt);
-	    });
+	    $canvas.mouseleave(mouseLeaveHandler);
+	    $canvas.mouseenter(mouseEnterHandler);
+
+	    $cover.click(clickedStartHandler);
   	}
 });
 
 function mouseDownHandler(evt) {
-	mouseDown = true;
-	    	
-	ctx.beginPath();
-	ctx.moveTo(evt.offsetX, evt.offsetY);    
+	if(isArtTime) {
+		mouseDown = true;
+		ctx.beginPath();
+		ctx.moveTo(evt.offsetX, evt.offsetY);
+	}    
 }
 
 function mouseMoveHandler(evt) {
-	if(mouseDown) {
+	if(isArtTime && mouseDown) {
 		var x = Math.max(evt.offsetX, 0);
 		var y = Math.max(evt.offsetY, 0);
 		ctx.lineTo(x, y);
@@ -38,19 +36,101 @@ function mouseMoveHandler(evt) {
 }
 
 function mouseUpHandler(evt) {
-	mouseDown = false;
-	ctx.closePath();
+	if(isArtTime) {
+		mouseDown = false;
+		ctx.closePath();
+	}
+}
+
+function mouseLeaveHandler(evt) {
+	if(isArtTime) {
+		mouseMoveHandler(evt);
+		mouseUpHandler(evt);
+	}
+}
+
+function mouseEnterHandler(evt) {
+	if(isArtTime && evt.which) {
+		mouseDownHandler(evt);
+	}
+}
+
+function clickedStartHandler() {
+	$cover.unbind('click');
+	countDownTo(startArt)
+}
+
+function startArt() {
+	console.log("ART STARTED")
+
+	endOfArtTime = (new Date).getTime() + 10000
+	isArtTime = true
+	intervalID = setInterval(tick, 1000/60)
+}
+
+function tick() {
+	timeLeft = endOfArtTime - (new Date).getTime()
+	if(timeLeft > 0) {
+		displayTimeLeft(timeLeft)
+	} else {
+		stopArt()
+	}
+}
+
+function displayTimeLeft(time) {
+	time /= 100; //tenths of a second
+	time = parseInt(time);
+	time /= 10; //seconds to 1dp
+	time = new String(time)
+
+	if(time.length == 1)
+		time += ".0"
+
+	$timer.html(time)
+}
+
+function stopArt() {
+	isArtTime = false;
+	displayTimeLeft(0)
+	clearInterval(intervalID);
+	$cover.show().html("Stop!")
+	save();
 }
 
 function save() {
+	$('#submit').submit();
+}
+
+function setImageData() {
 	var data=canvas.toDataURL("image/png");
 	data = data.replace(/^data:image\/png;base64,/, "");   
 
 	$('input#data').val(data)
 
-	console.log($('input#data'))	
-
 	return true;
 }
 
+function countDownTo(callMe) {
+   	queueMsg('Ready', 333);
+   	queueMsg('Ready.', 333);
+   	queueMsg('Ready..', 333);
+   	queueMsg('Ready...', 333);
+   	queueMsg('Scribble!', 333);
+   	$cover.queue(function(next) {
+   		$cover.css('opacity','0');
+   		next();
+   	}).
+   	delay(300).
+   	queue(function(next) {
+   		$cover.hide();
+   		callMe();
+   		next();
+   	});
+}
 
+function queueMsg(msg, time) {
+	$cover.queue(function(next) {
+		$cover.html(msg);
+		next();
+	}).delay(time);
+}

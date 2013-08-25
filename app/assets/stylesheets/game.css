@@ -17,14 +17,55 @@ div#content {
 	width: 500px;
 }
 
-canvas {
+#canvas-container {
 	border: 1px solid black;
 	height: 300px;
 	width: 500px;
 }
 
+#canvas-container #cover {
+	position: absolute;
+	display: block;
+	font-size: 4em;
+	font-weight: bold;
+	padding-top: 100px;
+	text-align: center;
+	width: 500px;
+	height: 300px;
+}
+
+#canvas-container span:hover {
+	cursor: pointer;
+	cursor: hand;
+}
+
+canvas {
+	position: absolute;
+	border: 1px solid black;
+	height: 300px;
+	width: 500px;
+	cursor: crosshair;
+}
+
+#flashy {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -1ex;
+    text-align:center;
+}
+
 #target {
 	color: red;
+	font-size: 150%;
+}
+
+#timer {
+	font-size: 150%;
+	display: inline-block;
+	width: 75px;
+	text-align: center;
 }
 
 #alert {

@@ -9,16 +9,12 @@ class DrawController < ApplicationController
 		image = Base64.decode64(params[:data]);
 		type = ScribbleType.find(params[:type_id])
 
-		if(!type)
-			render status: 400, text: "uh oh"
-		end
-
 		key = getKey type
 
 		s = Scribble.new(s3_key: key, scribble_type_id: type.id, user_id: current_user.id)
 		s.saveImage image
 
-		redirect_to :root
+		redirect_to :play
 	end
 
 	private
