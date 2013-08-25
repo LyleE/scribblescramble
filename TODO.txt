@@ -1,6 +1,5 @@
 HIGH:
-- Drawing: Colours (numbered shortcuts)
+- Leaderboard
 
 MEDIUM:
 - Drawing: Pen size, (mouse scroll?)
-- Leaderboard

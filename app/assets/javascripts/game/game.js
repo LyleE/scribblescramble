@@ -14,6 +14,7 @@ $(function() {
 	    $canvas.mouseleave(mouseLeaveHandler);
 	    $canvas.mouseenter(mouseEnterHandler);
 
+	    $('.colour').click(colourClickHandler);
 	    $cover.click(clickedStartHandler);
   	}
 });
@@ -55,6 +56,14 @@ function mouseEnterHandler(evt) {
 	}
 }
 
+function colourClickHandler(evt) {
+	setColourTo($(evt.target).css('background-color'));
+}
+
+function setColourTo(c) {
+	ctx.strokeStyle = c
+}
+
 function clickedStartHandler() {
 	$cover.unbind('click');
 	hideNotifications();
@@ -62,7 +71,6 @@ function clickedStartHandler() {
 }
 
 function startArt() {
-
 	endOfArtTime = (new Date).getTime() + 10000
 	isArtTime = true
 	intervalID = setInterval(tick, 1000/60)
