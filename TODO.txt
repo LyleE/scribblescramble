@@ -1,0 +1,11 @@
+- Vastly improve drawing interface!!!
+	- Colours, (numbered)
+	- Pen size, (mouse scroll)
+- Timer on drawing
+	- "You're drawing a duck" [OK]
+	- Ready, set, "art"!
+	- Countdown timer
+	- auto submit form
+- Finish Rating system
+	- test ELO
+	- Display in top right
