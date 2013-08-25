@@ -48,6 +48,7 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     hike (1.2.3)
+    hirb (0.7.1)
     httpauth (0.2.0)
     httpclient (2.3.4.1)
     i18n (0.6.5)
@@ -150,6 +151,7 @@ DEPENDENCIES
   autorefresh
   aws-sdk
   coffee-rails (~> 4.0.0)
+  hirb
   jbuilder (~> 1.2)
   jquery-rails
   rails (= 4.0.0)
