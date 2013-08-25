@@ -2,4 +2,4 @@
 
 <%= render 'form' %>
 
-<%= button_to 'Delete Forever', user_path(@user), :method => :delete %>
+<%= button_to 'Delete Forever', user_path(@user), method: :delete, data: { confirm: "Are you sure!? This will delete your profile for real for ever!"} %>

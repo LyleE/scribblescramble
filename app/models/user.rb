@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	authenticates_with_sorcery!
-	has_many :scribbles
+	has_many :scribbles, :dependent => :destroy
 
 	validates :username, :uniqueness => {:message => " is already taken"}
 	validates_length_of :username, :minimum => 3, :message => "must be at least 3 characters long"

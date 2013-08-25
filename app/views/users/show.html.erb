@@ -1,6 +1,8 @@
 <p>
-  <strong>Username:</strong>
-  <%= @user.username %>
+  <h2><%= @user.username %></h2>
+  <span>Rating: <%= @user.rating %></span>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %>
+<% if(@user.id == current_user.id) %>
+	<%= link_to 'Settings', edit_user_path(@user) %>
+<% end %>

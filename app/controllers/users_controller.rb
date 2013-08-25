@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login, :only => [:new, :create]
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   # GET /users/1
   def show
+    if User.exists?(params[:id])
+      @user = User.find(params[:id])
+    else
+      redirect_to current_user, notice: 'Who?'
+    end
   end
 
   # GET /register
@@ -15,6 +18,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if params[:id].to_i != current_user.id
+      redirect_to edit_user_path(current_user), notice: 'Can\'t edit other people, bro'
+    end
+    @user = current_user
     @button_text = "Save"
   end
 
@@ -34,9 +41,13 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    if params[:id].to_i != current_user.id
+      redirect_to current_user, notice: 'Can\'t edit other people, bro'
+    end
+
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      if current_user.update(user_params)
+        format.html { redirect_to current_user, notice: 'User was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
@@ -45,17 +56,16 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    if params[:id].to_i != current_user.id
+      redirect_to edit_user_path(current_user), notice: 'Can\'t delete other people bro!'
+    end
+    current_user.destroy
     respond_to do |format|
-      format.html { redirect_to :login }
+      format.html { redirect_to :register, notice: "User deleted forever!" }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params

@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20130824210515) do
   create_table "scribbles", force: true do |t|
     t.string  "s3_key"
     t.integer "scribble_type_id"
-    t.boolean "rated",            default: false
     t.integer "user_id"
     t.integer "last_rated",       default: 0
   end
