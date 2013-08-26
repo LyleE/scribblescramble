@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
       if @user = login(params[:username],params[:password])
         format.html { redirect_back_or_to(:play, :notice => 'Login successful.') }
       else
-        format.html { redirect_to(:login, :alert => "Login failed.") }
+        format.html { redirect_to(:login, :alert => "Login failed. Things are case sensitive, so type carefully!") }
       end
     end
   end
