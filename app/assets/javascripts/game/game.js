@@ -16,6 +16,8 @@ $(function() {
 
 	    $('.colour').click(colourClickHandler);
 	    $cover.click(clickedStartHandler);
+
+	    $(document).keypress(colourKeyDownHandler);
   	}
 });
 
@@ -60,8 +62,17 @@ function colourClickHandler(evt) {
 	setColourTo($(evt.target).css('background-color'));
 }
 
+function colourKeyDownHandler(evt) {
+	if(evt.which >= 48 && evt.which <58) { // numbers 0-9
+		var key = evt.which - 48
+		setColourTo($('.colour'+key).css('background-color'))
+	}
+}
+
 function setColourTo(c) {
-	ctx.strokeStyle = c
+	console.log("set colour to:", c);
+	ctx.strokeStyle = c;
+	
 }
 
 function clickedStartHandler() {

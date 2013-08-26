@@ -18,9 +18,9 @@ function hoverInHandler(evt) {
 	console.log($winner, $loser)
 
 	colour($winner, '0, 128, 0')
-	$winner.css('background-image','url(assets/thumbs_up.png)')
+	$winner.css('background-image','url(<%= asset_path "thumbs_up.png" %>)')
 	colour($loser, '128, 0, 0')
-	$loser.css('background-image','url(assets/thumbs_down.png)')
+	$loser.css('background-image','url(<%= asset_path "thumbs_down.png" %>)')
 }
 
 function colour(element, c) {
