@@ -1,8 +1,10 @@
 Vagrant::Application.routes.draw do
   root :to => 'draw#index', as: :play
-  
+
   #resources :user_sessions
   post 'user_sessions/new' => 'user_sessions#create', as: :user_sessions
+
+  get 'users' => 'users#index'
 
   #resources :users
   get 'users/:id' => 'users#show', as: :user

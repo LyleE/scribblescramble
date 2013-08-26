@@ -121,7 +121,7 @@ canvas {
 }
 
 /*
-*** Rating page
+ *** Rating page
 */
 
 a.scribble0, a.scribble1 {
@@ -135,4 +135,30 @@ a.scribble0, a.scribble1 {
 
 a.scribble0 img, a.scribble1  img {
 	display: block;
+}
+
+/*
+ *** Leaderboard
+ */
+
+#top10 h2 {
+	text-align: center;
+}
+
+#top10 table {
+	margin: auto;
+}
+
+#top10 table td.rank {
+	width: 30px;
+	font-weight: bold;
+}
+
+#top10 table td.name {
+	width: 150px;
+}
+
+#top10 table td.rating {
+	text-align:right;
+	font-weight: bold;
 }

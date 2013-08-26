@@ -1,0 +1,14 @@
+<% ratings = @users %>
+
+<div id="top10">
+	<h2>Top Players</h2>
+	<table>
+	<% @users.each do |user| %>
+		<tr>
+			<td class="rank"><%= rank user, @users %></td>
+			<td class="name"><%= user.username %></td>
+			<td class="rating"><%= user.rating %></td>
+		</tr>
+	<% end %>
+</table>
+</div>

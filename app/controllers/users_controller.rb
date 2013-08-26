@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = User.order("rating DESC").limit(10)
+  end
+
   # GET /register
   def new
     @user = User.new

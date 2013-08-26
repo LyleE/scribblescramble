@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
 	validates_length_of :password, :minimum => 6, :message => "must be at least 6 characters long", :if => :password
 	validates_confirmation_of :password, :message => "doesn't match", :if => :password
 
+	def position
+		pos = User.where("rating > ?", rating).count + 1
+		pos = "="+pos.to_s if User.where(rating: rating).count > 1
+		pos
+	end
+
 	def won_vs other
 		update_rating 1.0, other
 	end
