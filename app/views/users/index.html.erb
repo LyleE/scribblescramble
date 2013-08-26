@@ -1,14 +1,22 @@
-<% ratings = @users %>
-
 <div id="top10">
 	<h2>Top Players</h2>
 	<table>
-	<% @users.each do |user| %>
-		<tr>
-			<td class="rank"><%= rank user, @users %></td>
-			<td class="name"><%= user.username %></td>
-			<td class="rating"><%= user.rating %></td>
-		</tr>
+		<% @users.each do |user| %>
+			<tr>
+				<td class="rank"><%= rank user, @users %></td>
+				<td class="name"><%= user.username %></td>
+				<td class="rating"><%= user.rating %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
+
+<div id="recentScribbles">
+<h2>Recent Scribbles awaiting moderation...</h2>
+	<% @scribbles.each do |s| %>
+		<div>
+			<h3><%= s.username %>'s scribble of a <%= s.name %>:</ h3>
+			<%= image_tag s.url %>
+		</div>
 	<% end %>
-</table>
 </div>

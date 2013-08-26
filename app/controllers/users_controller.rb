@@ -11,7 +11,14 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.order("rating DESC").limit(10)
+    @users = User.order("rating DESC").select :username, :rating
+    @scribbles = Scribble.
+      joins(:user) . 
+      joins(:scribble_type) .
+      group(:name, :username) .
+      order("scribbles.id DESC") . 
+      limit(10) . 
+      select :username, :name, :s3_key
   end
 
   # GET /register
